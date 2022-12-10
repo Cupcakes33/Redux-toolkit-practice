@@ -1,7 +1,7 @@
-
+import CommentsContainer from "./container/CommentsContainer";
 
 function App() {
-  return <div></div>
+  return <CommentsContainer />;
 }
 
 export default App;
