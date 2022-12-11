@@ -28,7 +28,9 @@ export const commentsSlice = createSlice({
       });
     },
     deleteComments: (state, action) => {
-      state.comments.filter((comment) => comment !== action.payload);
+      comments: state.comments.filter(
+        (comment) => comment !== action.payload
+      );
     },
     isLikeComments: (state, action) => {},
     updateComments: (state, action) => {},
