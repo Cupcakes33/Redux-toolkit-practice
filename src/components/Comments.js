@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-const Comments = ({ postId, comments, onAddComments, onDeleteComments }) => {
+const Comments = ({
+  postId,
+  comments,
+  onAddComments,
+  onDeleteComments,
+  onUpdateComments,
+  onIsLikeComments,
+}) => {
   const today = new Date();
   const timeStringify = today.toLocaleTimeString("ko");
   const [input, setInput] = useState("");
+  const [isInputUpdate, setIsInputUpdate] = useState(false);
   const inputChangeHandler = (event) => {
     setInput(event.target.value);
   };
@@ -21,6 +29,13 @@ const Comments = ({ postId, comments, onAddComments, onDeleteComments }) => {
   const deleteButtonHandler = (id) => {
     onDeleteComments(id);
   };
+  const updateButtonHandler = (id) => {
+    onUpdateComments(id);
+  };
+
+  const isLikeClickHandler = (id) => {
+    onIsLikeComments(id);
+  };
 
   return (
     <div className="box">
@@ -32,7 +47,14 @@ const Comments = ({ postId, comments, onAddComments, onDeleteComments }) => {
         {comments.map((comments, n) => {
           return (
             <div key={`comments${n}`}>
-              <input value={comments.text} readOnly />
+              <span
+                onClick={() => {
+                  isLikeClickHandler(comments.commentsId);
+                }}
+              >
+                {comments.isLike ? "Like" : "disLike"}
+              </span>
+              <input value={comments.text} />
               <button
                 onClick={() => {
                   deleteButtonHandler(comments.commentsId);
@@ -40,7 +62,14 @@ const Comments = ({ postId, comments, onAddComments, onDeleteComments }) => {
               >
                 delete
               </button>
-              <button>update</button>
+              <button
+                onClick={() => {
+                  setIsInputUpdate(!isInputUpdate);
+                  updateButtonHandler(comments.commentsId);
+                }}
+              >
+                update
+              </button>
               <span>{comments.createAt}</span>
             </div>
           );

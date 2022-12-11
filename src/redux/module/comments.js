@@ -28,12 +28,19 @@ export const commentsSlice = createSlice({
       });
     },
     deleteComments: (state, action) => {
-      comments: state.comments.filter(
-        (comment) => comment !== action.payload
+      state.comments = state.comments.filter(
+        (e) => e.commentsId !== parseInt(action.payload, 10)
       );
     },
-    isLikeComments: (state, action) => {},
-    updateComments: (state, action) => {},
+    updateComments: (state, action) => {
+      state.comments = state.comments.filter((e) => e);
+    },
+    isLikeComments: (state, action) => {
+      const data = state.comments.find(
+        (e) => e.commentsId === parseInt(action.payload, 10)
+      );
+      data.isLike = !data.isLike;
+    },
   },
 });
 
