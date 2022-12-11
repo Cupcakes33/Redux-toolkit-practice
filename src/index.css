@@ -11,21 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-.listStyle {
-  list-style: none;
-  width: 300px;
-  height: 20px;
-  border-bottom: 10px;
-  display: flex;
-  margin-bottom: 10px;
-}
-
-.listStyle div {
-  margin-right: 10px;
-}
-
-.listStyle span {
-  width: 70%;
-  text-align: left;
-}
